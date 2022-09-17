@@ -1,0 +1,18 @@
+.gameboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    gap: 1rem;
+
+    background: #e6e6e6;
+}
+
+.boxCards {
+    display: grid;
+    grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+    gap: 1rem; 
+
+}
+

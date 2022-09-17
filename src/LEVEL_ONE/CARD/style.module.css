@@ -1,0 +1,39 @@
+.cardWrapper {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 600ms;
+    cursor: pointer;
+}
+
+.cardImages {
+    width: 6rem;
+    height: 6rem;
+    object-fit: contain;
+
+}
+
+.active {
+    transform: rotateY(180deg)
+}
+
+.card_FRONT,
+.card_BACK {
+    width: 6.25rem;
+    height: 6.25rem;
+    border-radius: 8px;
+    box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.322);
+}
+
+.card_FRONT {
+    background: blueviolet;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.card_BACK {
+    transform: rotateY(180deg);
+    background: chocolate;
+    backface-visibility: hidden;
+
+}

@@ -8,6 +8,7 @@ interface cardsProps {
 interface CardGame {
     name: string;
     active: boolean;
+    match : boolean,
     id: string;
 }
 
@@ -19,6 +20,7 @@ export function createCardGame(cards: cardsProps[]): CardGame[] {
         return {
             name : card.name,
             active : false,
+            match : false,
             id : uuidV4()
         }
     })

@@ -1,6 +1,7 @@
 interface CardGame {
     name: string;
     active: boolean;
+    match : boolean;
     id: string;
 }
 

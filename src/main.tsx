@@ -4,7 +4,7 @@ import { Routes } from './app.routes'
 import './styles/global.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <Routes/>
-  </React.StrictMode>
+  //</React.StrictMode>
 )

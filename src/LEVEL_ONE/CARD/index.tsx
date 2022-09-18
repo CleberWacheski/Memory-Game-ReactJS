@@ -4,16 +4,17 @@ interface cardProps {
 
     name: string;
     id: string;
-    active: boolean;
+    active: boolean | 'Match';
+    match : boolean;
     handleActiveCard: (id: string) => void;
 }
 
 
-export function Card({ active, id, name, handleActiveCard }: cardProps) {
+export function Card({ active, id, name, match, handleActiveCard }: cardProps) {
 
     return (
         <div
-            className={`${style.cardWrapper} ${(active) ? style.active : ''}`}
+            className={`${style.cardWrapper} ${(active || match) ? style.active : ''}`}
             onClick={() => handleActiveCard(id)}
         >
 

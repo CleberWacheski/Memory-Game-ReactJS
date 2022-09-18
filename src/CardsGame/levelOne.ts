@@ -1,4 +1,4 @@
-export const CARDS = [
+export const CARDS_LEVEL_ONE = [
   { name: "bob_esponja_dancing" },
   { name: "bob_friends" },
   { name: "bob_esponja_happy" },

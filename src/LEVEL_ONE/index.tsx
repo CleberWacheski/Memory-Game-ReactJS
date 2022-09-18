@@ -1,14 +1,15 @@
 import style from './style.module.css'
 import { useEffect, useState } from 'react'
 import { createCardGame } from '../../src/utils/createCardGame'
-import { CARDS } from '../../src/utils/LEVEL_ONE_CARDs'
+import { CARDS_LEVEL_ONE } from '../CardsGame/levelOne'
 import { Card } from './CARD'
+import { updateCardActive } from '../utils/gameLogic'
 
-const CardGame = createCardGame(CARDS)
+const CardGame = createCardGame(CARDS_LEVEL_ONE)
 
 interface activerCardsProps {
-  name : string;
-  id : string;
+  name: string;
+  id: string;
 }
 
 
@@ -20,30 +21,20 @@ export const LevelOne = () => {
 
   function handleActiveCard(id: string) {
 
-    setCards(state => {
+    setCards(state => updateCardActive(state, id))
 
-      return state.map((card) => {
-
-        if (card.id === id) {
-          card.active = true
-        }
-
-        return card
-      })
-
-    })
   }
 
-  function checkIfMatchTwoCards () {
+  function checkIfMatchTwoCards() {
 
     cards.forEach((card) => {
       if (card.active && !activeOne.name) {
-        setActiveOne({ name : card.name , id : card.id})
+        setActiveOne({ name: card.name, id: card.id })
       }
-      else if (card.active ) {
+      else if (card.active) {
         if (card.id != activeOne.id && card.name === activeOne.name) {
-          setCards(state=> {
-            return state.map((stateCard)=> {
+          setCards(state => {
+            return state.map((stateCard) => {
               if (stateCard.id === card.id || stateCard.id === activeOne.id) {
                 stateCard.active = false
                 stateCard.match = true
@@ -52,13 +43,13 @@ export const LevelOne = () => {
             })
           })
 
-          setActiveOne({name : '',id: '' })
+          setActiveOne({ name: '', id: '' })
         }
 
         if (card.name != activeOne.name) {
 
-          setCards(state=> {
-            return state.map((stateCard)=> {
+          setCards(state => {
+            return state.map((stateCard) => {
               if (stateCard.id === card.id || stateCard.id === activeOne.id) {
                 stateCard.active = false
               }
@@ -66,19 +57,19 @@ export const LevelOne = () => {
             })
           })
 
-          setActiveOne({name : '',id: '' })
+          setActiveOne({ name: '', id: '' })
         }
       }
 
     })
   }
 
-  useEffect(()=> {
-    setTimeout(()=> {
+  useEffect(() => {
+    setTimeout(() => {
       checkIfMatchTwoCards()
-    },400)
-    
-  },[cards])
+    }, 400)
+
+  }, [cards])
 
 
 
@@ -104,22 +95,3 @@ export const LevelOne = () => {
   )
 }
 
-
-// const activeCardOne = cards.find((card) => card.id === actives[0])
-//       const activeCardTwo = cards.find((card) => card.id === actives[1])
-
-//       if (activeCardOne!.name != activeCardTwo!.name) {
-//         setCards((state) => {
-
-//           return state.map((cardState) => {
-//             if (cardState.id === activeCardOne!.id) {
-//               cardState.active = false
-//             }
-//             else if (cardState.id === activeCardTwo!.id) {
-//               cardState.active = false
-//             }
-//             return cardState
-//           })
-//         })
-        
-//       }

@@ -1,16 +1,17 @@
-import style from './../CARD/style.module.css'
+import { memo } from 'react';
+import style from './style.module.css'
 
 interface cardProps {
 
     name: string;
     id: string;
     active: boolean | 'Match';
-    match : boolean;
+    match: boolean;
     handleActiveCard: (id: string) => void;
 }
 
 
-export function Card({ active, id, name, match, handleActiveCard }: cardProps) {
+export const Card = ({ active, id, name, match, handleActiveCard }: cardProps) => {
 
     return (
         <div

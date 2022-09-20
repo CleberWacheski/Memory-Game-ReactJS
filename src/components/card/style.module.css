@@ -1,0 +1,127 @@
+.cardWrapper {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 600ms;
+    cursor: pointer;
+}
+
+.cardImages {
+    width: 6rem;
+    height: 6rem;
+    object-fit: contain;
+
+}
+
+.active {
+    transform: rotateY(180deg)
+}
+
+.card_FRONT,
+.card_BACK {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 8px;
+    box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.322);
+}
+
+.card_FRONT {
+    background: #375267;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.card_BACK {
+    transform: rotateY(180deg);
+    background: #de6730;
+    backface-visibility: hidden;
+
+}
+
+@media (max-width: 950px) {
+
+    .card_FRONT,
+    .card_BACK {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .cardImages {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+}
+
+@media (max-width: 850px) {
+
+    .card_FRONT,
+    .card_BACK {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+
+    .cardImages {
+        width: 5rem;
+        height: 5rem;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .card_FRONT,
+    .card_BACK {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .cardImages {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .card_FRONT,
+    .card_BACK {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 8px;
+        box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.322);
+    }
+
+    .cardImages {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .card_FRONT,
+    .card_BACK {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 8px;
+        box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.322);
+    }
+
+    .cardImages {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@media (max-width: 220px) {
+    .card_BACK {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 8px;
+        box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.322);
+    }
+
+    .cardImages {
+        width: 2rem;
+        height: 2rem;
+    }
+}

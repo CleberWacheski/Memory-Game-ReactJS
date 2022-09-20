@@ -1,4 +1,3 @@
-import { useTimer } from "../utils/useTimer";
 
 interface CardGame {
     name: string;
@@ -88,20 +87,6 @@ export const reducer = (state: ReducerProps, action: any) => {
             })
 
             return response
-
-        }
-        case ('checkEndGame'): {
-
-            if (state.CardGame.every((card) => card.match === true)) {
-                return {
-                    CardGame: state.CardGame.map((card) => {
-                        card.match = false
-                        card.active = false
-                        return card
-                    }),
-                    activeOne: { name: '', id: '' }
-                }
-            }
         }
 
     }

@@ -1,11 +1,15 @@
 import style from './style.module.css'
-import { useReducer } from 'react'
+import { useContext, useEffect, useReducer } from 'react'
 import { createCardGame } from '../../utils/createCardGame'
 import { CARDS_LEVEL_ONE } from '../../CardsGame/levelOne'
 import { Card } from '../../components/card'
 import { reducer } from '../../reducer/reducer'
-import { checkEndGame, checkIfMatchTwoCards, updateCardActive } from '../../reducer/actions'
-import {Timer} from '../../components/timer'
+import { checkIfMatchTwoCards, updateCardActive } from '../../reducer/actions'
+import { Timer } from '../../components/timer'
+import { useNavigate } from 'react-router-dom'
+import { api } from '../../services/api'
+import { useTimer } from '../../utils/useTimer'
+import { UserContext } from '../../contexts/user'
 
 
 interface activeCardsProps {
@@ -21,18 +25,47 @@ const activeOne = {} as activeCardsProps
 export const LevelOne = () => {
 
   const [cardsState, dispatch] = useReducer(reducer, { CardGame, activeOne })
+  const { timer } = useTimer()
+  const { user } = useContext(UserContext)
+
+  const navigation = useNavigate()
 
   function handleActiveCard(id: string) {
 
     dispatch(updateCardActive(id))
-
     setTimeout(() => {
-
       dispatch(checkIfMatchTwoCards())
-      dispatch(checkEndGame())
     }, 500)
 
   }
+
+  useEffect(() => {
+    if (!user.name) {
+      navigation('/')
+    }
+  }, [])
+
+  useEffect(() => {
+    async function endGame() {
+
+      const records = {
+        LevelOne: timer,
+      }
+
+      const { data } = await api.put(`/user/${user._id}`, {
+        records: { ...records }
+      })
+
+      console.log(data)
+      navigation('/records')
+    }
+
+    if (cardsState.CardGame.every((card) => card.match === true)) {
+      endGame()
+    }
+  }, [cardsState])
+
+
 
 
   return (
@@ -55,5 +88,6 @@ export const LevelOne = () => {
     </div>
 
   )
+
 }
 

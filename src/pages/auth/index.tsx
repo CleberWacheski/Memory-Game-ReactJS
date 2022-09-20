@@ -2,8 +2,10 @@ import style from './style.module.css'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import {useNavigate} from 'react-router-dom'
-
+import { json, useNavigate } from 'react-router-dom'
+import { api } from '../../services/api'
+import { useContext } from 'react'
+import { UserContext } from '../../contexts/user'
 
 const schema = yup.object({
     email: yup.string().required("Campo obrigatorio"),
@@ -19,17 +21,32 @@ interface FormProps {
 export const Auth = () => {
 
     const navigation = useNavigate()
+    const {CreateUser} = useContext(UserContext)
 
     const { handleSubmit, register, formState: { errors } } = useForm<FormProps>({
         resolver: yupResolver(schema)
     })
 
-    const handleLoginWithMemoryGame:  SubmitHandler<FormProps> = (value, event) => {
-        
-        navigation('/Home')
+    const handleLoginWithMemoryGame: SubmitHandler<FormProps> = async (value, event) => {
+        const { email, name } = value
+
+
+        try {
+            const {data} =  await api.post('/user', {
+                name,
+                email
+            })
+
+            CreateUser(data)
+            navigation('/Home')
+            
+        }
+        catch (err) {
+            alert('Problemas no servidor ,tente mais tarde...')
+        }
+
     }
 
-    console.log(errors)
     return (
         <div className={style.homeContainer}>
             <h1 className={style.title}>MEMORY GAME</h1>

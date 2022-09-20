@@ -1,11 +1,15 @@
 import style from './style.module.css'
-import { useReducer } from 'react'
+import { useContext, useEffect, useReducer } from 'react'
 import { createCardGame } from '../../utils/createCardGame'
 import { Card } from '../../components/card'
 import { reducer } from '../../reducer/reducer'
-import { checkEndGame, checkIfMatchTwoCards, updateCardActive } from '../../reducer/actions'
+import { checkIfMatchTwoCards, updateCardActive } from '../../reducer/actions'
 import { CARDS_LEVEL_TWO } from '../../CardsGame/levelTwo'
-import {Timer} from '../../components/timer'
+import { Timer } from '../../components/timer'
+import { useTimer } from '../../utils/useTimer'
+import { UserContext } from '../../contexts/user'
+import { useNavigate } from 'react-router-dom'
+import { api } from '../../services/api'
 
 
 interface activeCardsProps {
@@ -21,6 +25,10 @@ const activeOne = {} as activeCardsProps
 export const LevelTwo = () => {
 
   const [cardsState, dispatch] = useReducer(reducer, { CardGame, activeOne })
+  const { timer } = useTimer()
+  const { user } = useContext(UserContext)
+
+  const navigation = useNavigate()
 
   function handleActiveCard(id: string) {
 
@@ -28,15 +36,35 @@ export const LevelTwo = () => {
 
     setTimeout(() => {
       dispatch(checkIfMatchTwoCards())
-      dispatch(checkEndGame())
     }, 500)
   }
 
-//   useEffect(() => {
-//     if (cardsState.CardGame.every((card) => card.match === true)) {
-     
-//     }
-//   }, [cardsState])
+  useEffect(() => {
+    if (!user.name) {
+      navigation('/')
+    }
+  }, [])
+
+  useEffect(() => {
+    async function endGame() {
+
+      const records = {
+        LevelTwo: timer
+      }
+
+      const { data } = await api.put(`/user/${user._id}`, {
+        records: { ...records }
+      })
+
+      console.log(data)
+      navigation('/records')
+    }
+
+    if (cardsState.CardGame.every((card) => card.match === true)) {
+      endGame()
+    }
+  }, [cardsState])
+
 
   return (
     <div className={style.gameboard}>
@@ -54,7 +82,7 @@ export const LevelTwo = () => {
           )
         }
       </div>
-      <Timer /> 
+      <Timer />
     </div>
 
   )

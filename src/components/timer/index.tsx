@@ -1,14 +1,16 @@
-import { memo } from 'react'
-import { useTimer } from '../../utils/useTimer'
+import { memo, useEffect, useState } from 'react'
 import style from './style.module.css'
 
-const timer = () => {
+interface TimerPros {
+    minutes : string;
+    seconds : string;
+}
 
-    const { timer } = useTimer()
+const timer = ({minutes,seconds} : TimerPros) => {
 
     return (
         <div>
-            <p className={style.timer}>{timer}</p>
+            <p className={style.timer}>{`${minutes}:${seconds}`}</p>
         </div>
     )
 

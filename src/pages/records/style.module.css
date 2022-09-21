@@ -1,0 +1,61 @@
+.container {    
+    background-color: #D0C9C0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+.container p {
+    font-size: 2rem;
+}
+
+.table {
+    margin: 0 auto;
+    padding: 1rem;
+}
+.table td, .table th {
+    border: 1px solid gray;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.table td :hover, .table th:hover {
+    opacity: 0.9;
+}
+
+.table thead tr th {
+   padding: 1rem 4rem;
+   background-color: #2C3639;
+   color: white;
+}
+
+.table tbody tr td {
+    font-weight: 200;
+    text-align: center;
+    padding: 1rem 2rem;
+}
+.button {
+    font-size: 1rem;
+    font-weight: bolder;
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #2C3639;
+    color: white;
+    cursor: pointer;
+
+    transition: all 200ms;
+}
+
+.button:hover {
+    padding: 1.1rem;
+    font-size: 2rem;
+}
+
+.button:active {
+    background-color: black;
+    color: #A27B5C;
+    
+}

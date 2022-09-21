@@ -21,7 +21,7 @@ export const Home = () => {
             <div className={style.BoxButtons}>
                 <button className={style.button} onClick={() => navigation('/LevelOne')}>LEVEL ONE</button>
                 <button className={style.button} onClick={() => navigation('/LevelTwo')}>LEVEL TWO</button>
-                <button className={style.ButtonRecords}>RECORDS</button>
+                <button className={style.ButtonRecords}  onClick={() => navigation('/Records')}>RECORDS</button>
                 <p>@{user.name}</p>
             </div>
         </div>

@@ -20,6 +20,30 @@
     
 }
 
+.ButtonStart {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #de6730;
+    color: white;
+    cursor: pointer;
+
+    transition: all 200ms;
+}
+
+.ButtonStart:hover {
+    padding: 1.3rem;
+    font-size: 2.2rem;
+}
+
+.ButtonStart:active {
+    background-color: black;
+    color: #A27B5C;
+    
+}
+
 @media (max-width: 800px) {
     .boxCards {
         grid-template: repeat(5, 1fr) / repeat(7, 1fr);

@@ -36,7 +36,7 @@ export const Auth = () => {
                 name,
                 email
             })
-
+            console.log(data)
             CreateUser(data)
             navigation('/Home')
             

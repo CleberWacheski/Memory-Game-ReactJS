@@ -1,3 +1,5 @@
+import { NavigateFunction } from "react-router-dom";
+import { api } from "../services/api";
 
 interface CardGame {
     name: string;
@@ -16,6 +18,8 @@ interface ReducerProps {
     activeOne: activeCardsProps
 }
 
+
+   
 
 
 export const reducer = (state: ReducerProps, action: any) => {
@@ -54,7 +58,7 @@ export const reducer = (state: ReducerProps, action: any) => {
                 else if (card.active) {
                     if (card.id != state.activeOne.id && card.name === state.activeOne.name) {
 
-                        const cardsUpdate = state.CardGame.map((stateCard) => {
+                        const updateCard = state.CardGame.map((stateCard) => {
 
                             if (stateCard.id === card.id || stateCard.id === state.activeOne.id) {
                                 stateCard.active = false
@@ -64,21 +68,21 @@ export const reducer = (state: ReducerProps, action: any) => {
                         })
 
                         response = {
-                            CardGame: cardsUpdate,
+                            CardGame: updateCard,
                             activeOne: { name: '', id: '' }
                         }
                     }
 
                     if (card.name != state.activeOne.name) {
 
-                        const cardsUpdate = state.CardGame.map((stateCard) => {
+                        const updateCard = state.CardGame.map((stateCard) => {
                             if (stateCard.id === card.id || stateCard.id === state.activeOne.id) {
                                 stateCard.active = false
                             }
                             return stateCard
                         })
                         response = {
-                            CardGame: cardsUpdate,
+                            CardGame: updateCard,
                             activeOne: { name: '', id: '' }
                         }
                     }
@@ -88,6 +92,27 @@ export const reducer = (state: ReducerProps, action: any) => {
 
             return response
         }
+
+        case ('checkEndGame'): {
+
+            let response = {
+                CardGame: state.CardGame,
+                activeOne: { name: '', id: '' }
+            }
+
+                const updateCard = state.CardGame.map((card) => {
+                    card.match = false
+                    card.active = false
+                    return card
+                })
+
+                response.CardGame = updateCard
+            
+
+            return response
+
+        }
+
 
     }
 

@@ -1,12 +1,11 @@
 import style from './style.module.css'
-import { useContext, useEffect, useReducer } from 'react'
+import { useContext, useEffect, useReducer, useState } from 'react'
 import { createCardGame } from '../../utils/createCardGame'
 import { Card } from '../../components/card'
 import { reducer } from '../../reducer/reducer'
-import { checkIfMatchTwoCards, updateCardActive } from '../../reducer/actions'
+import { checkEndGame, checkIfMatchTwoCards, updateCardActive } from '../../reducer/actions'
 import { CARDS_LEVEL_TWO } from '../../CardsGame/levelTwo'
 import { Timer } from '../../components/timer'
-import { useTimer } from '../../utils/useTimer'
 import { UserContext } from '../../contexts/user'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
@@ -25,45 +24,72 @@ const activeOne = {} as activeCardsProps
 export const LevelTwo = () => {
 
   const [cardsState, dispatch] = useReducer(reducer, { CardGame, activeOne })
-  const { timer } = useTimer()
+  const [start, setStart] = useState(false)
   const { user } = useContext(UserContext)
+  const [timer, setTimer] = useState(0)
+
+  let minutes = String(Math.floor(timer / 60)).padStart(2, '0')
+  let seconds = String(timer % 60).padStart(2, '0')
 
   const navigation = useNavigate()
 
+
   function handleActiveCard(id: string) {
 
-    dispatch(updateCardActive(id))
+    if (start) {
+      dispatch(updateCardActive(id))
+      setTimeout(() => {
+        dispatch(checkIfMatchTwoCards())
+      }, 500)
+    }
 
-    setTimeout(() => {
-      dispatch(checkIfMatchTwoCards())
-    }, 500)
   }
 
   useEffect(() => {
+    if (start) {
+      setTimeout(() => {
+        setTimer(state => state + 1)
+      }, 1000)
+    }
+  }, [timer, start])
+
+
+  useEffect(() => {
+
+    setStart(false)
+    dispatch(checkEndGame())
+
     if (!user.name) {
       navigation('/')
     }
+
   }, [])
+
 
   useEffect(() => {
     async function endGame() {
 
       const records = {
-        LevelTwo: timer
+        LevelTwo: `${minutes}:${seconds}`,
       }
 
-      const { data } = await api.put(`/user/${user._id}`, {
+
+      await api.put(`/user/${user._id}`, {
         records: { ...records }
       })
 
-      console.log(data)
-      navigation('/records')
+      setTimeout(() => {
+        navigation('/Records')
+      }, 1000)
+
     }
 
-    if (cardsState.CardGame.every((card) => card.match === true)) {
+    if (cardsState.CardGame.every((card) => card.match === true && start)) {
+      setStart(false)
       endGame()
     }
-  }, [cardsState])
+
+  }, [cardsState.CardGame])
 
 
   return (
@@ -82,7 +108,11 @@ export const LevelTwo = () => {
           )
         }
       </div>
-      <Timer />
+      {(!start)
+        ?
+        <button onClick={() => setStart(true)} className={style.ButtonStart}>START</button>
+        :
+        <Timer minutes={minutes} seconds={seconds} />}
     </div>
 
   )

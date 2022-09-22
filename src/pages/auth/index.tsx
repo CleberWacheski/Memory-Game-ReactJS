@@ -2,7 +2,7 @@ import style from './style.module.css'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { json, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 import { useContext } from 'react'
 import { UserContext } from '../../contexts/user'
@@ -32,16 +32,18 @@ export const Auth = () => {
 
 
         try {
-            const {data} =  await api.post('/user', {
+            const {data} =  await api.post('/', {
                 name,
                 email
             })
-            console.log(data)
+
+
             CreateUser(data)
             navigation('/Home')
             
         }
         catch (err) {
+            console.log(err)
             alert('Problemas no servidor ,tente mais tarde...')
         }
 

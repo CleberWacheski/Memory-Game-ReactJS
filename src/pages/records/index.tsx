@@ -17,7 +17,7 @@ export function Records() {
 
     useEffect(() => {
         async function GetPlayers() {
-            const { data } = await api.get('/user')
+            const { data } = await api.get('/users')
 
             setPlayers(data)
         }

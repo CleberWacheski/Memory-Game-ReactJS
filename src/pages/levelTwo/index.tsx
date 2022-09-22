@@ -74,8 +74,12 @@ export const LevelTwo = () => {
       }
 
 
-      await api.put(`/user/${user._id}`, {
+      await api.put(`/users`, {
         records: { ...records }
+      },{
+        params : {
+          id : user._id
+        }
       })
 
       setTimeout(() => {

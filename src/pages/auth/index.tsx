@@ -32,7 +32,7 @@ export const Auth = () => {
 
 
         try {
-            const {data} =  await api.post('/', {
+            const {data} =  await api.post('/users', {
                 name,
                 email
             })

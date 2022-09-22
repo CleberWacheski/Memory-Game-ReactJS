@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL : 'https://serverless-vercel-memory-game.vercel.app/api/users/'
+    baseURL : 'https://serverless-vercel-memory-game.vercel.app/api'
 })
 

@@ -73,7 +73,7 @@ export const LevelOne = () => {
         LevelOne: `${minutes}:${seconds}`,
       }
 
-      await api.put(`/users/${user._id}`, {
+      await api.put(`/users`, {
         records: { ...records }
       })
 

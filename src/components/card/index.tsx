@@ -26,7 +26,7 @@ export const Card = ({ active, id, name, match, handleActiveCard }: cardProps) =
             >
                 <img
                     className={style.cardImages}
-                    src={`../src/assets/${name}.png`}
+                    src={`./${name}.png`}
                 />
             </div>
 

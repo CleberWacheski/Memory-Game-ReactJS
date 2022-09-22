@@ -6,7 +6,7 @@
     width: 100vw;
     height: 100vh;
     gap: 0.5rem;
-    background-image: url('../../assets/LevelTwobackground.jpg');
+    background-image: url('./LevelTwobackground.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     opacity: 0.9;

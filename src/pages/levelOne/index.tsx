@@ -51,7 +51,7 @@ export const LevelOne = () => {
         setTimer(state => state + 1)
       }, 1000)
     }
-  }, [timer,start])
+  }, [timer, start])
 
 
   useEffect(() => {
@@ -75,10 +75,14 @@ export const LevelOne = () => {
 
       await api.put(`/users`, {
         records: { ...records }
+      }, {
+        params: {
+          id: user._id
+        }
       })
 
       setTimeout(() => {
-        navigation('/Records')
+        navigation('/Home')
       }, 1000)
 
     }

@@ -83,7 +83,7 @@ export const LevelTwo = () => {
       })
 
       setTimeout(() => {
-        navigation('/Records')
+        navigation('/Home')
       }, 1000)
 
     }

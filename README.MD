@@ -15,10 +15,6 @@
 </h1>
 
 
-## Demonstração :rocket: 
-
-[MEMORY GAME - Vercel](https://memory-game-sigma-gray.vercel.app/)
-
 ## Back-end: :computer:
 
 [Link do repositorio](https://github.com/CleberWacheski/Memory-Game-BackEnd-Serverless) :arrow_right: (Serverless) Usando Api Routes do Next JS <br/>
